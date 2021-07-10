@@ -77,6 +77,66 @@ public class LinkedListAlgo {
         return soldier.next;
     }
 
+    /**
+     * @param: list
+     * @param: k
+     * @description: 删除链表倒数第 K 个结点
+     * @return: linkedlist.LinkedListAlgo.Node
+     * @author: ycbron
+     * @date: 2021/7/10
+     */
+    public static Node deleteLastKth(Node list, int k){
+        Node fast = list;
+        int i = 1;
+        while (fast != null && i < k){
+            fast = fast.next;
+            i++;
+        }
+        if(fast == null) {
+            return list;
+        }
+
+        Node pre = null;
+        Node slow = list;
+        while (fast.next != null){
+            fast = fast.next;
+            pre = slow;
+            slow = slow.next;
+        }
+        if(pre == null) {
+            list = list.next;
+        }
+        else {
+            pre.next = pre.next.next;
+        }
+        return list;
+    }
+
+    /**
+     * @param: list
+     * @param: k
+     * @description: 删除链表倒数第 K 个结点（添加哨兵结点）
+     * @return: linkedlist.LinkedListAlgo.Node
+     * @author: ycbron
+     * @date: 2021/7/10
+     */
+    public static Node deleteLastKth1(Node list, int k){
+        if(list == null) return list;
+        Node soldier = new Node(0, list);
+        Node fast = soldier.next;
+        Node slow = soldier;
+        while ( k > 0){
+            fast = fast.next;
+            k--;
+        }
+        while (fast != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return  soldier.next;
+    }
+
     public static class Node {
         private int data;
         private Node next;
