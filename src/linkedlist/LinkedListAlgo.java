@@ -137,6 +137,24 @@ public class LinkedListAlgo {
         return  soldier.next;
     }
 
+    /**
+     * @param: head
+     * @description: 获得链表的中间结点
+     * @return: linkedlist.LinkedListAlgo.Node
+     * @author: ycbron
+     * @date: 2021/7/10
+     */
+    public static Node getMiddleNode(Node head){
+        if(head == null) return head;
+        Node fast = head;
+        Node slow = head;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
     public static class Node {
         private int data;
         private Node next;
