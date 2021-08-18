@@ -27,9 +27,18 @@ public class ArrayQueue {
      * @date: 2021/1/30
      */
     public boolean enqueue(String item) {
-        //如果tail = n, 表示队列已满
-        if(tail == n)
-            return false;
+        if(tail == n){
+            // tail == n && head == 0 队列已满
+            if(head == 0){
+                return false;
+            }
+            for(int i = head; i < tail; i++){
+                items[i - head] = items[i];
+            }
+            tail = tail - head;
+            head = 0;
+        }
+
         items[tail] = item;
         ++tail;
         return true;

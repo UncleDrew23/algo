@@ -7,7 +7,7 @@ package queue;
  * @create: 2021-01-30 20:16
  **/
 public class QueueBasedLinkedList {
-    private class Node {
+    private static class Node {
         private String data;
         private Node next;
 
