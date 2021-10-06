@@ -37,7 +37,8 @@ public class MergeSort {
         mergeSortInternally(a, p, q);
         mergeSortInternally(a, q + 1, r);
         // 将 a[p...q] 和 a[q+1...r] 合并成 a[p...r]
-        merge(a, p, q, r);
+        //merge(a, p, q, r);
+        mergeBySentry(a, p, q, r);
     }
     /**
      * @param: a
@@ -75,6 +76,42 @@ public class MergeSort {
 
         for(i = 0; i <= r - p; i++){
             a[p + i] = tmp[i];
+        }
+    }
+    /**
+     * @param: a
+     * @param: p
+     * @param: q
+     * @param: r
+     * @description: 利用哨兵简化合并过程，避免判断是否还存在剩余数据
+     * @return: void
+     * @author: ycbron
+     * @date: 2021/10/6
+     */
+    private static void mergeBySentry(int[] a, int p, int q, int r) {
+        // 多留一个空用来存储哨兵 left： q - p + 1 +1; right: r - (q + 1) + 1 + 1
+        int[] leftArr = new int[q - p + 2];
+        int[] rightArr = new int[r - q + 1];
+        for(int i = 0; i <= q - p; i++){
+            leftArr[i] = a[p + i];
+        }
+        // 添加哨兵（最大值）
+        leftArr[q - p + 1] = Integer.MAX_VALUE;
+        for(int i = 0; i <= r - (q + 1); i++) {
+            rightArr[i] = a[q + 1 + i];
+        }
+        // 添加哨兵（最大值）
+        rightArr[r - q] = Integer.MAX_VALUE;
+
+        int i = 0, j = 0, k = p;
+        while (k <= r) {
+            // 当左边数组到达哨兵值时，i 不再增加，同时右边数组会读取完剩余数据
+            if(leftArr[i] <= rightArr[j]) {
+                a[k++] = leftArr[i++];
+            }
+            else {
+                a[k++] = rightArr[j++];
+            }
         }
     }
 
