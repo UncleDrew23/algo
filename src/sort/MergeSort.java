@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @program: algo
- * @description: 归并排序
+ * @description: 归并排序（先处理子问题，在合并）自下而上
  * @author: ycbron
  * @create: 2021-10-06 20:56
  **/
