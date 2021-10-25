@@ -42,7 +42,7 @@ public class QuickSort {
         a[i] = a[r];
         a[r] = tmp;
 
-        System.out.println("i = " + i);
+//        System.out.println("i = " + i);
         return i;
     }
 
@@ -57,11 +57,11 @@ public class QuickSort {
      * @date: 2021/10/26
      */
     private static int getKthSmallest(int[] a, int l, int r, int k) {
-        if(l >= r) return 0;
+        if(l >= r) return a[l];
         int p = partition(a, l ,r);
         if(p + 1 == k) {
             return a[p];
-        } else if(p + 1 > k) {
+        } else if(p + 1 < k) {
             return getKthSmallest(a, p + 1, r, k);
         } else {
             return getKthSmallest(a, l, p - 1, k);
@@ -69,10 +69,12 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] a = {8,7,6,5,4,3,2,1};
+        int[] a = {8,13,26,5,47,30,21,6};
         System.out.println(Arrays.toString(a));
-        quickSort(a, a.length);
-        System.out.println(Arrays.toString(a));
+//        quickSort(a, a.length);
+//        System.out.println(Arrays.toString(a));
+        int result = getKthSmallest(a, 0, a.length - 1, 8 );
+        System.out.println(result);
     }
 }
 
