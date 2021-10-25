@@ -46,6 +46,28 @@ public class QuickSort {
         return i;
     }
 
+    /**
+     * @param: a
+     * @param: l
+     * @param: r
+     * @param: k
+     * @description: 求无序数组中第 K 大的元素 （利用快排分区的思想）
+     * @return: int
+     * @author: ycbron
+     * @date: 2021/10/26
+     */
+    private static int getKthSmallest(int[] a, int l, int r, int k) {
+        if(l >= r) return 0;
+        int p = partition(a, l ,r);
+        if(p + 1 == k) {
+            return a[p];
+        } else if(p + 1 > k) {
+            return getKthSmallest(a, p + 1, r, k);
+        } else {
+            return getKthSmallest(a, l, p - 1, k);
+        }
+    }
+
     public static void main(String[] args) {
         int[] a = {8,7,6,5,4,3,2,1};
         System.out.println(Arrays.toString(a));
