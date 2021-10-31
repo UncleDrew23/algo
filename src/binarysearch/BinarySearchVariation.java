@@ -62,4 +62,55 @@ public class BinarySearchVariation {
         }
         return -1;
     }
+
+    /**
+     * @param: a
+     * @param: n
+     * @param: value
+     * @description: 查找第一个大于等于给定值的元素
+     * @return: int
+     * @author: ycbron
+     * @date: 2021/10/31
+     */
+    public static int binarySearchFirstLarge(int[] a, int n, int value) {
+        int low = 0;
+        int high = n - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if(a[mid] >= value) {
+                // mid == 0 表示数组中的第一个元素大于等于给定值，满足要求；若 mid != 0，且a[mid]的前一个元素小于value，说明a[mid]就是要找的第一个大于等于给定值的元素，否则在mid前面寻找
+                if((mid == 0) || (a[mid - 1] < value)) return mid;
+                else high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @param: a
+     * @param: n
+     * @param: value
+     * @description: 查找最后一个值小于等于给定值的元素
+     * @return: int
+     * @author: ycbron
+     * @date: 2021/10/31
+     */
+    public static int binarySearchLastLarge(int[] a, int n, int value) {
+        int low = 0;
+        int high = n - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if(a[mid] > value) {
+                high = mid - 1;
+            } else{
+                // mid == n - 1 表示数组中的最后一个元素小于等于给定值，满足要求；若 mid != n - 1，且a[mid]的后一个元素大于value，说明a[mid]就是要找的最后一个小于等于给定值的元素，否则在mid后面寻找
+                if((mid == n - 1) || (a[mid + 1] > value)) return mid;
+                else low = mid + 1;
+            }
+        }
+        return -1;
+    }
+
 }
